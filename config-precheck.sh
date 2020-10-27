@@ -33,4 +33,6 @@ fi
 echo -e "${GREEN}Configuring StorageOS pre-flight kernel module installations"
 docker run --name enable_lio --privileged --rm --cap-add=SYS_ADMIN -v /lib/modules:/lib/modules -v /sys:/sys:rshared storageos/init:0.2
 mkdir -p /var/lib/storageos
+echo -e "${GREEN}No specific pre-requisites for Portworx are required${NC}"
 echo -e "${GREEN}Pre-testing checks and installations completed${NC}"
+
