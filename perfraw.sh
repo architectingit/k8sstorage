@@ -6,7 +6,7 @@ if [ -z $DBENCH_MOUNTPOINT ]; then
 fi
 
 if [ -z $FIO_SIZE ]; then
-    FIO_SIZE=50G
+    FIO_SIZE=250G
 fi
 
 if [ -z $FIO_OFFSET_INCREMENT ]; then
