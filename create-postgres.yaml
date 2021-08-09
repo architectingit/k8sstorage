@@ -25,6 +25,9 @@ spec:
               value: testpassword
             - name: PGDATA
               value: /data/pgdata
+          args:
+            - -c
+            -  max_connections=1000
   # Volume Claim
   volumeClaimTemplates:
     - metadata:
@@ -34,3 +37,4 @@ spec:
         resources:
           requests:
             storage: 25Gi
+        storageClassName: fast
