@@ -1,6 +1,6 @@
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-apt-get install kubeadm=1.19.13-00 kubelet=1.19.13-00 kubectl=1.19.13-00
+apt-get -y install kubeadm=1.19.13-00 kubelet=1.19.13-00 kubectl=1.19.13-00
 echo "Manually issue 'sudo swapoff -a'"
 echo "On master node:"
 echo 
