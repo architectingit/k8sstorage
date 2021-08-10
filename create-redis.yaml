@@ -47,3 +47,4 @@ spec:
       resources:
         requests:
           storage: 300Gi
+      storageClassName: fast
