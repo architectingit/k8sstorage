@@ -46,5 +46,5 @@ spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 300Gi
+          storage: 50Gi
       storageClassName: fast
