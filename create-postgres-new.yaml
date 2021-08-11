@@ -1,0 +1,70 @@
+# PostgreSQL StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql-db
+spec:
+  serviceName: postgresql-db-service
+  selector:
+    matchLabels:
+      app: postgresql-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgresql-db
+    spec:
+      containers:
+        - name: postgresql-db
+          image: postgres:latest
+          volumeMounts:
+            - name: postgresql-db-disk
+              mountPath: /data
+          env:
+            - name: POSTGRES_PASSWORD
+              value: testpassword
+            - name: PGDATA
+              value: /data/pgdata
+          args:
+            - -c
+            -  max_connections=1000
+            - -c
+            -  shared_buffers=2GB
+            - -c
+            -  effective_cache_size=6GB
+            - -c
+            -  maintenance_work_mem=1GB
+            - -c
+            -  checkpoint_completion_target=0.9
+            - -c
+            -  wal_buffers=16MB
+            - -c
+            -  default_statistics_target=500
+            - -c
+            -  random_page_cost=1.1
+            - -c
+            -  effective_io_concurrency=200
+            - -c
+            -  work_mem=131kB
+            - -c
+            -  min_wal_size=4GB
+            - -c
+            -  max_wal_size=16GB
+            - -c
+            -  max_worker_processes=16
+            - -c
+            -  max_parallel_workers_per_gather=8
+            - -c
+            -  max_parallel_workers=16
+            - -c
+            -  max_parallel_maintenance_workers=4
+  # Volume Claim
+  volumeClaimTemplates:
+    - metadata:
+        name: postgresql-db-disk
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 300Gi
+        storageClassName: portworx-sc
