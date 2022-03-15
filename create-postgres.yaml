@@ -37,4 +37,4 @@ spec:
         resources:
           requests:
             storage: 25Gi
-        storageClassName: fast
+        storageClassName: standard
