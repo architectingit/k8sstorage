@@ -1,6 +1,13 @@
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 apt-get -y install kubeadm=1.22.8-00 kubelet=1.22.8-00 kubectl=1.22.8-00
+cat << EOF > /etc/docker/daemon.json
+{
+    "exec-opts": ["native.cgroupdriver=systemd"]
+}
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl restart kubelet
 echo "Manually issue 'sudo swapoff -a'"
 echo "On master node:"
 echo 
