@@ -67,4 +67,4 @@ spec:
         resources:
           requests:
             storage: 300Gi
-        storageClassName: portworx-sc
+        storageClassName: storageos
