@@ -12,12 +12,15 @@ spec:
     volumeMounts:
       - name: fiovol
         mountPath: /fiovol
-  volumeClaimTemplates:
-  - metadata:
-      name: fiovol
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 300Gi
-      storageClassName: storageos
+---        
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fiovol
+spec:
+  storageClassName: storageos
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 300Gi
