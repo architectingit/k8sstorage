@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: fiovol
 spec:
-  storageClassName: storageos
+  storageClassName: storageos-rep
   accessModes:
     - ReadWriteOnce
   resources:
