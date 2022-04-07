@@ -9,3 +9,12 @@ spec:
     # Just spin & wait forever
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "while true; do sleep 30; done;" ]
+  volumeClaimTemplates:
+  - metadata:
+      name: fiovol
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 300Gi
+      storageClassName: storageos
