@@ -7,6 +7,7 @@ ORANGE='\033[0;33]'
 NC='\033[0m' # No Color
 
 apt -y update
+apt upgrade
 
 echo -e "${GREEN}Checking installed software and features....${NC}"
 
