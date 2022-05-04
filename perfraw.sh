@@ -7,6 +7,7 @@ fi
 
 if [ -z $FIO_SIZE ]; then
     FIO_SIZE=240G
+    FIO_SIZE2=60G
 fi
 
 if [ -z $FIO_OFFSET_INCREMENT ]; then
@@ -69,14 +70,14 @@ echo
         echo
 
         echo Testing Read Sequential Speed...
-        READ_SEQ=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --gtod_reduce=1 --name=read_seq --filename=$DBENCH_MOUNTPOINT/fiotest --bs=1M --iodepth=4 --fdatasync=$FIO_SYNC --size=$FIO_SIZE --readwrite=read --time_based --ramp_time=10s --runtime=30s --thread --numjobs=4 --offset=0 --offset_increment=$FIO_OFFSET_INCREMENT)
+        READ_SEQ=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --gtod_reduce=1 --name=read_seq --filename=$DBENCH_MOUNTPOINT/fiotest --bs=1M --iodepth=4 --fdatasync=$FIO_SYNC --size=$FIO_SIZE2 --readwrite=read --time_based --ramp_time=10s --runtime=30s --thread --numjobs=4 --offset=0 --offset_increment=$FIO_OFFSET_INCREMENT)
         echo "$READ_SEQ"
         READ_SEQ_VAL=$(echo "$READ_SEQ"|grep -E 'READ:'|grep -Eoi '(aggrb|bw)=[0-9GMKiBs/.]+'|cut -d'=' -f2)
         echo
         echo
 
         echo Testing Write Sequential Speed...
-        WRITE_SEQ=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --gtod_reduce=1 --name=write_seq --filename=$DBENCH_MOUNTPOINT/fiotest --bs=1M --iodepth=4 --fdatasync=$FIO_SYNC --size=$FIO_SIZE --readwrite=write --time_based --ramp_time=10s --runtime=30s --thread --numjobs=4 --offset=0 --offset_increment=$FIO_OFFSET_INCREMENT)
+        WRITE_SEQ=$(fio --randrepeat=0 --verify=0 --ioengine=libaio --direct=$FIO_DIRECT --gtod_reduce=1 --name=write_seq --filename=$DBENCH_MOUNTPOINT/fiotest --bs=1M --iodepth=4 --fdatasync=$FIO_SYNC --size=$FIO_SIZE2 --readwrite=write --time_based --ramp_time=10s --runtime=30s --thread --numjobs=4 --offset=0 --offset_increment=$FIO_OFFSET_INCREMENT)
         echo "$WRITE_SEQ"
         WRITE_SEQ_VAL=$(echo "$WRITE_SEQ"|grep -E 'WRITE:'|grep -Eoi '(aggrb|bw)=[0-9GMKiBs/.]+'|cut -d'=' -f2)
         echo
