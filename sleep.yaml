@@ -19,8 +19,16 @@ spec:
     - name: fiovol
       persistentVolumeClaim:
         claimName: fiovol
+    - name: proc1
+      hostPath:
+        path: /proc   
   containers:
   - name: ubuntu
+    securityContext:
+      privileged: true
+      capabilities:
+        add:
+        - SYS_ADMIN
     image: ubuntu:latest
     # Just spin & wait forever
     command: [ "/bin/bash", "-c", "--" ]
@@ -28,5 +36,8 @@ spec:
     volumeMounts:
       - name: fiovol
         mountPath: /fiovol
+      - name: proc1
+        mountPath: /proc
+        mountPropagation: Bidirectional  
 #  nodeSelector:
 #    kubernetes.io/hostname: ondat-worker02
